@@ -54,7 +54,6 @@ section {
       stroke: #ff1e1e;
       stroke-dasharray: 640;
       stroke-dashoffset: 640;
-      
     }
   }
 }
@@ -319,6 +318,16 @@ footer {
   }
 }
 
+@keyframes cidadesLoop {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width: 1500px) {
@@ -351,6 +360,7 @@ footer {
   header img {
     width: 105px;
   }
+
   .hero {
     flex-direction: column;
     padding: 22% 4vw 0;
@@ -382,7 +392,7 @@ footer {
   }
 
   .secaoCidade {
-    margin-top: 80px;
+    padding-top: 80px;
     button {
       display: none;
     }
@@ -422,14 +432,34 @@ footer {
 
   .secaoObrigado {
     margin: 40px 0px 60px;
+    overflow: hidden;
+
     h2 {
       text-align: center;
+      margin-bottom: 24px;
     }
-    ul {
-      width: max-content;
-      gap: 32px;
-      animation: textoInfinito 8s infinite linear;
-    }
+  }
+
+  .cidadesWrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .cidadesTrack {
+    display: flex;
+    width: max-content;
+    animation: cidadesLoop 15s linear infinite;
+  }
+
+  .cidadesTrack ul {
+    display: flex;
+    gap: 32px;
+    width: max-content;
+    padding-right: 32px;
+  }
+
+  .cidadesTrack li {
+    white-space: nowrap;
   }
 
   footer {
