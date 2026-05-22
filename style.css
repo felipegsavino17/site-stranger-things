@@ -44,7 +44,6 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
 
   svg {
     width: 40vw;
@@ -55,6 +54,7 @@ section {
       stroke: #ff1e1e;
       stroke-dasharray: 640;
       stroke-dashoffset: 640;
+      
     }
   }
 }
@@ -319,16 +319,6 @@ footer {
   }
 }
 
-@keyframes cidadesLoop {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 /* MEDIA QUERIES */
 
 @media (max-width: 1500px) {
@@ -350,6 +340,20 @@ footer {
     padding: 4vw;
   }
 
+  .secaoObrigado .marqueeObrigado {
+  display: flex;
+  width: max-content;
+  gap: 32px;
+  overflow: hidden;
+}
+
+.secaoObrigado .marqueeObrigado ul {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  animation: textoInfinito 10s linear infinite;
+}
+
   h2 {
     font-size: 6vw;
   }
@@ -361,7 +365,6 @@ footer {
   header img {
     width: 105px;
   }
-
   .hero {
     flex-direction: column;
     padding: 22% 4vw 0;
@@ -433,34 +436,14 @@ footer {
 
   .secaoObrigado {
     margin: 40px 0px 60px;
-    overflow: hidden;
-
     h2 {
       text-align: center;
-      margin-bottom: 24px;
     }
-  }
-
-  .cidadesWrapper {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .cidadesTrack {
-    display: flex;
-    width: max-content;
-    animation: cidadesLoop 15s linear infinite;
-  }
-
-  .cidadesTrack ul {
-    display: flex;
-    gap: 32px;
-    width: max-content;
-    padding-right: 32px;
-  }
-
-  .cidadesTrack li {
-    white-space: nowrap;
+    ul {
+      width: max-content;
+      gap: 32px;
+      animation: textoInfinito 8s infinite linear;
+    }
   }
 
   footer {

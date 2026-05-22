@@ -8,93 +8,94 @@ ScrollSmoother.create({
 });
 
 function animarPagina() {
+
   // ANIMAÇÕES HERO
 
-  gsap.from("hero", {
+gsap.from("hero", {
+  opacity: 0,
+  duration: 1,
+});
+
+gsap.from("picture:nth-child(2)", {
+  y: 200,
+  duration: 1,
+});
+
+gsap.from("picture:nth-child(1)", {
+  y: -60,
+  duration: 1,
+});
+
+// ANIMAÇÕES CARDS
+
+gsap.from(".card", {
+  opacity: 0,
+  duration: 1,
+  filter: "blur(8px)",
+  stagger: 0.3,
+  scrollTrigger: {
+    trigger: ".cards",
+    start: "0% 80%",
+    end: "100% 70%",
+    scrub: true,
+  },
+});
+
+gsap.from(".secaoObrigado ul li", {
+  opacity: 0,
+  x: 40,
+  filter: "blur(5px)",
+  stagger: 0.1,
+  scrollTrigger: {
+    trigger: ".secaoObrigado ul",
+    start: "0% 80%",
+    end: "100% 40%",
+    scrub: true,
+  },
+});
+
+// ANIMAÇÕES FOOTER
+
+gsap.from("footer", {
+  y: "-30%",
+  immediateRender: false,
+  scrollTrigger: {
+    trigger: "footer",
+    scrub: true,
+    invalidateOnRefresh: true,
+    end: "100% 100%",
+  },
+});
+
+// LETRAS ANIMADAS
+
+// SELECIONE TODOS OS ELEMENTOS DA SUA PAGINA Q TEM A CLASSE .textoSplit
+
+const grupoTextoSplit = document.querySelectorAll(".textoSplit");
+
+// ANIMAR CADA ELEMENTO DESSE GRUPAMENTO -> forEach
+
+grupoTextoSplit.forEach((textoUnicoSplit) => {
+  const split = SplitText.create(textoUnicoSplit, {
+    type: "lines, words, chars",
+    mask: "lines",
+  });
+
+  gsap.from(split.chars, {
+    y: 40,
     opacity: 0,
-    duration: 1,
-  });
-
-  gsap.from("picture:nth-child(2)", {
-    y: 200,
-    duration: 1,
-  });
-
-  gsap.from("picture:nth-child(1)", {
-    y: -60,
-    duration: 1,
-  });
-
-  // ANIMAÇÕES CARDS
-
-  gsap.from(".card", {
-    opacity: 0,
-    duration: 1,
-    filter: "blur(8px)",
-    stagger: 0.3,
+    duration: 0.3,
+    stagger: 0.04,
     scrollTrigger: {
-      trigger: ".cards",
-      start: "0% 80%",
-      end: "100% 70%",
-      scrub: true,
-    },
+      trigger: textoUnicoSplit,
+    }
   });
-
-  gsap.from(".secaoObrigado ul li", {
-    opacity: 0,
-    x: 40,
-    filter: "blur(5px)",
-    stagger: 0.1,
-    scrollTrigger: {
-      trigger: ".secaoObrigado ul",
-      start: "0% 80%",
-      end: "100% 40%",
-      scrub: true,
-    },
-  });
-
-  // ANIMAÇÕES FOOTER
-
-  gsap.from("footer", {
-    y: "-30%",
-    immediateRender: false,
-    scrollTrigger: {
-      trigger: "footer",
-      scrub: true,
-      invalidateOnRefresh: true,
-      end: "100% 100%",
-    },
-  });
-
-  // LETRAS ANIMADAS
-
-  // SELECIONE TODOS OS ELEMENTOS DA SUA PAGINA Q TEM A CLASSE .textoSplit
-
-  const grupoTextoSplit = document.querySelectorAll(".textoSplit");
-
-  // ANIMAR CADA ELEMENTO DESSE GRUPAMENTO -> forEach
-
-  grupoTextoSplit.forEach((textoUnicoSplit) => {
-    const split = SplitText.create(textoUnicoSplit, {
-      type: "lines, words, chars",
-      mask: "lines",
-    });
-
-    gsap.from(split.chars, {
-      y: 40,
-      opacity: 0,
-      duration: 0.3,
-      stagger: 0.04,
-      scrollTrigger: {
-        trigger: textoUnicoSplit,
-      },
-    });
-  });
+});
 }
 
-// PRELOADER /  E ABAIXO O CÓDIGO QUE FIZ PELO CURSO, EM COMENTÁRIO TAMBÉM.
+// PRELOADER
 
-/*const tl = gsap.timeline( {
+const tl = gsap.timeline( {
   onComplete(){
     animarPagina()
     gsap.to("#preloader",{
@@ -111,36 +112,7 @@ tl.to("#preloader path",{
 tl.to("#preloader path",{
   fill: "#ff1e1e",
   strokeDashoffset: 0
-})*/
+})
 
-// PRELOADER
 
-window.addEventListener("load", () => {
-  const tl = gsap.timeline({
-    onComplete() {
-      animarPagina();
 
-      gsap.to("#preloader", {
-        opacity: 0,
-        duration: 0.5,
-        pointerEvents: "none",
-
-        onComplete() {
-          document.querySelector("#preloader").style.display = "none";
-        },
-      });
-    },
-  });
-
-  tl.to("#preloader path", {
-    duration: 1.5,
-    strokeDashoffset: 0,
-    ease: "power2.out",
-  });
-
-  tl.to("#preloader path", {
-    duration: 0.8,
-    fill: "#ff1e1e",
-    ease: "power2.out",
-  });
-});
